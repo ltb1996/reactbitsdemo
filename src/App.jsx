@@ -40,7 +40,7 @@ function App() {
           autoSpeed={autoSpeed}
           autoIntensity={autoIntensity}
           takeoverDuration={0.25}
-          autoResumeDelay={3000}
+          autoResumeDelay={100}
           autoRampDuration={0.6}
         />
       </div>
