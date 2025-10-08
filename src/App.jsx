@@ -75,6 +75,8 @@ function App() {
             direction="top"
             onAnimationComplete={handleAnimationComplete}
             className="title"
+            loop={true}
+            loopDelay={1000}
           />
 
           <div className="button-group">

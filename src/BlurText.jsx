@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
 
@@ -23,10 +24,13 @@ const BlurText = ({
   animationTo,
   easing = t => t,
   onAnimationComplete,
-  stepDuration = 0.35
+  stepDuration = 0.35,
+  loop = false,
+  loopDelay = 2000
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -70,6 +74,17 @@ const BlurText = ({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
+  const handleComplete = () => {
+    if (onAnimationComplete) {
+      onAnimationComplete();
+    }
+    if (loop) {
+      setTimeout(() => {
+        setAnimationKey(prev => prev + 1);
+      }, loopDelay);
+    }
+  };
+
   return (
     <p ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap' }}>
       {elements.map((segment, index) => {
@@ -85,11 +100,11 @@ const BlurText = ({
         return (
           <motion.span
             className="inline-block will-change-[transform,filter,opacity]"
-            key={index}
+            key={`${index}-${animationKey}`}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
-            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+            onAnimationComplete={index === elements.length - 1 ? handleComplete : undefined}
           >
             {segment === ' ' ? '\u00A0' : segment}
             {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
