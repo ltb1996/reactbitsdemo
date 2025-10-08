@@ -974,6 +974,7 @@ export default function LiquidEther({
             if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
             Common.renderer.dispose();
           }
+        // eslint-disable-next-line no-unused-vars
         } catch (e) {
           void 0;
         }
@@ -1054,6 +1055,7 @@ export default function LiquidEther({
       if (resizeObserverRef.current) {
         try {
           resizeObserverRef.current.disconnect();
+        // eslint-disable-next-line no-unused-vars
         } catch (e) {
           void 0;
         }
@@ -1061,6 +1063,7 @@ export default function LiquidEther({
       if (intersectionObserverRef.current) {
         try {
           intersectionObserverRef.current.disconnect();
+        // eslint-disable-next-line no-unused-vars
         } catch (e) {
           void 0;
         }

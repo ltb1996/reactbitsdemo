@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import LiquidEther from './LiquidEther'
 import CustomizePanel from './CustomizePanel'
+import BlurText from './BlurText'
 import './App.css'
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
   const [isViscous, setIsViscous] = useState(false)
   const [viscous, setViscous] = useState(30)
   const [iterationsViscous, setIterationsViscous] = useState(32)
+
+  const handleAnimationComplete = () => {
+    console.log('Title animation completed!')
+  }
 
   return (
     <div className="app-container">
@@ -63,7 +68,14 @@ function App() {
             </svg>
             New Background
           </div>
-          <h1 className="title">The web, made fluid at your fingertips.</h1>
+          <BlurText
+            text="The web, made fluid at your fingertips."
+            delay={150}
+            animateBy="words"
+            direction="top"
+            onAnimationComplete={handleAnimationComplete}
+            className="title"
+          />
 
           <div className="button-group">
             <button className="primary-button">Get Started</button>
