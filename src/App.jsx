@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import LiquidEther from './LiquidEther'
 import CustomizePanel from './CustomizePanel'
 import BlurText from './BlurText'
 import './App.css'
 
 function App() {
+  const navigate = useNavigate()
   const [showPanel, setShowPanel] = useState(false)
   const [colors, setColors] = useState(['#5227FF', '#FF9FFC', '#B19EEF'])
   const [mouseForce, setMouseForce] = useState(20)
@@ -80,7 +82,7 @@ function App() {
           />
 
           <div className="button-group">
-            <button className="primary-button">Get Started</button>
+            <button className="primary-button" onClick={() => navigate('/get-started')}>Get Started</button>
             <button className="secondary-button">Learn More</button>
           </div>
         </main>
